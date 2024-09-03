@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import '@fontsource/cascadia-code';
+
+:root {
+	--font-code: 'Cascadia Code';
+}

@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource/cascadia-code':
+    specifier: ^4.2.1
+    version: 4.2.1
   fumadocs-core:
     specifier: 13.4.1
     version: 13.4.1(@types/react@18.3.3)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
@@ -89,6 +92,11 @@ packages:
 
   /@floating-ui/utils@0.2.7:
     resolution: {integrity: sha512-X8R8Oj771YRl/w+c1HqAC1szL8zWQRwFvgDwT129k9ACdBoud/+/rX9V0qiMl6LWUdP9voC2nDVZYPMQQsb6eA==}
+    dev: false
+
+  /@fontsource/cascadia-code@4.2.1:
+    resolution: {integrity: sha512-Nb6RyI7dxe3jS7Ap0fl7/GQ9GksqDPNNEMZD+bvc+m5lCyVPvFtAYbXo9uojvLnIKhYCEFNGXlKCp2Vmn9Tx5Q==}
+    deprecated: Deprecated
     dev: false
 
   /@formatjs/intl-localematcher@0.5.4:
