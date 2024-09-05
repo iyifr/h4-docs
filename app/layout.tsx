@@ -11,7 +11,7 @@ const ceviche = Ceviche_One({ weight: "400", display: 'swap', variable: "--font-
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.className} ${ceviche.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${ceviche.variable} font-code`} suppressHydrationWarning>
       <body>
         <RootProvider>{children}</RootProvider>
       </body>
