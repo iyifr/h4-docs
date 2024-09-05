@@ -24,7 +24,7 @@ export default async function Page({
   return (
     <DocsPage toc={page.data.exports.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsDescription className='text-md'>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDX />
       </DocsBody>
