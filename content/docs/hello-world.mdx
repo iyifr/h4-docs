@@ -9,7 +9,7 @@ import { DartIcon } from './Dart.tsx'
 
 ### Pre-requisites.
 
-If you do not have dart installed, it is now time to install it.
+You must have the dart SDK installed on your computer.
 
 <Card
 	title='Installing dart'
@@ -36,7 +36,7 @@ Run the following commands
 dart pub global activate h4
 ```
 
-Let's bootstrap your first app by running the command below.
+Let's bootstrap your first app by running the command below in your terminal.
 
 ```bash
 dart pub global run h4:init
@@ -72,12 +72,12 @@ After answering the prompts, you will have a directory either in the current pat
 
 Navigate to index.dart.
 
-```dart title="index.dart" icon="DartIcon"
+```dart title="index.dart" icon="true"
 void main() async {
   var app = createApp(port: 5174);
-
   var router = createRouter();
   app.use(router);
+// [!code highlight:2]
   router.get("/", (event) => 'Hello world')
 }
 ```
@@ -88,9 +88,6 @@ Yay! The app is ready to go! Let's run our server.
 dart pub global h4:start --dev
 ```
 
-You should now see in the terminal -
+Visit localhost:5173 with your browser and voila! - `Hello world`.
 
-> Server started on port 5173.
-
-Visit localhost:5173 with your browser, postman or curl and you should get the famous `Hello world!`
-response.
+You've just taken your first steps.

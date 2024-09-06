@@ -7,3 +7,4 @@ export const { getPage, getPages, pageTree } = loader({
   rootDir: 'docs',
   source: createMDXSource(map),
 });
+
