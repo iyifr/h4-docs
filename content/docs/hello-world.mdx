@@ -4,6 +4,8 @@ description: Let's make your local server say the magic words.
 ---
 
 import { ExternalLinkIcon } from 'lucide-react'
+import { File, Folder, Files } from 'fumadocs-ui/components/files'
+import { DartIcon } from './Dart.tsx'
 
 ### Pre-requisites.
 
@@ -16,19 +18,79 @@ If you do not have dart installed, it is now time to install it.
 	icon={<ExternalLinkIcon />}
 />
 
-```dart
-var x = 12
+<br />
+
+Run the following command in your terminal to test your installation.
+
+```bash
+dart --version
+
+> Dart SDK version: 3.4.4 (stable) (None) on "linux_x64"
 ```
 
-## Cards
+### Set up H4.
 
-<Cards>
-	<Card
-		title='Learn more about Next.js'
-		href='https://nextjs.org/docs'
-	/>
-	<Card
-		title='Learn more about Fumadocs'
-		href='https://fumadocs.vercel.app'
-	/>
-</Cards>
+Run the following commands
+
+```bash
+dart pub global activate h4
+```
+
+Let's bootstrap your first app by running the command below.
+
+```bash
+dart pub global run h4:init
+```
+
+After answering the prompts, you will have a directory either in the current path or
+`/your_app_name` that looks like this..
+
+<Files>
+	<Folder name='.dart_tool'>
+		<File name='package_config.json' />
+	</Folder>
+	<Folder name='bin'>
+		<File name='myapp.dart' />
+	</Folder>
+	<Folder
+		name='lib'
+		defaultOpen
+	>
+		<File
+			name='index.dart'
+			icon={<DartIcon />}
+		/>
+	</Folder>
+	<Folder name='test' />
+	<File name='.gitignore' />
+	<File name='analysis_options.yaml' />
+	<File name='CHANGELOG.md' />
+	<File name='pubspec.lock' />
+	<File name='pubspec.yaml' />
+	<File name='README.MD' />
+</Files>
+
+Navigate to index.dart.
+
+```dart title="index.dart" icon="DartIcon"
+void main() async {
+  var app = createApp(port: 5174);
+
+  var router = createRouter();
+  app.use(router);
+  router.get("/", (event) => 'Hello world')
+}
+```
+
+Yay! The app is ready to go! Let's run our server.
+
+```bash
+dart pub global h4:start --dev
+```
+
+You should now see in the terminal -
+
+> Server started on port 5173.
+
+Visit localhost:5173 with your browser, postman or curl and you should get the famous `Hello world!`
+response.

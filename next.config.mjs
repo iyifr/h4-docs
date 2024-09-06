@@ -1,10 +1,12 @@
-import createMDX from 'fumadocs-mdx/config';
+import createMDX from 'fumadocs-mdx/config'
+import { rehypeCode } from 'fumadocs-core/mdx-plugins'
 
-const withMDX = createMDX();
+const withMDX = createMDX()
 
 /** @type {import('next').NextConfig} */
 const config = {
-  reactStrictMode: true,
-};
+	reactStrictMode: true,
+	rehypePlugins: [rehypeCode],
+}
 
-export default withMDX(config);
+export default withMDX(config)
