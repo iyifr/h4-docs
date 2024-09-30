@@ -5,7 +5,7 @@ import { pageTree } from '@/app/source';
 // shared configuration
 export const baseOptions: HomeLayoutProps = {
   nav: {
-    title: '▲ H-4 ▲',
+    title: '▲ H--4 ▲',
     transparentMode: 'top',
   },
   links: [

@@ -7,6 +7,8 @@ import {
   DocsTitle,
 } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
+import { Pre, CodeBlock } from 'fumadocs-ui/components/codeblock';
+import { DartIcon } from '@/app/icons/Dart';
 
 export default async function Page({
   params,
@@ -26,7 +28,14 @@ export default async function Page({
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription className='text-md'>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDX />
+        <MDX components={{
+          pre: ({ ref: _ref, ...props }) => {
+            {/*@ts-ignore */ }
+            return <CodeBlock {...props} icon={props.title?.includes('dart') ? <DartIcon height={34} /> : props.icon} >
+              <Pre>{props.children}</Pre>
+            </CodeBlock>
+          },
+        }} />
       </DocsBody>
     </DocsPage>
   );

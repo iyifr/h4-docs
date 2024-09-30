@@ -1,13 +1,13 @@
 ---
 title: Hello World
-description: Let's make your local server say the magic words.
+description: Let's get your local server saying the magic words.
 ---
 
 import { ExternalLinkIcon } from 'lucide-react'
 import { File, Folder, Files } from 'fumadocs-ui/components/files'
-import { DartIcon } from './Dart.tsx'
+import { DartIcon } from '@/app/icons/Dart'
 
-### Pre-requisites.
+### Before we begin.
 
 You must have the dart SDK installed on your computer.
 
@@ -20,7 +20,7 @@ You must have the dart SDK installed on your computer.
 
 <br />
 
-Run the following command in your terminal to test your installation.
+Run the following command in your terminal to test that you have installed dart properly.
 
 ```bash
 dart --version
@@ -30,20 +30,20 @@ dart --version
 
 ### Set up H4.
 
-Run the following commands
+Run the command below to get started.
 
-```bash
+```bash title="activate"
 dart pub global activate h4
 ```
 
-Let's bootstrap your first app by running the command below in your terminal.
+Now, let's bootstrap your first app.
 
-```bash
+```bash title="init"
 dart pub global run h4:init
 ```
 
-After answering the prompts, you will have a directory either in the current path or
-`/your_app_name` that looks like this..
+After answering the prompts, the directory containing your app will have a file structure like
+this..
 
 <Files>
 	<Folder name='.dart_tool'>
@@ -70,24 +70,24 @@ After answering the prompts, you will have a directory either in the current pat
 	<File name='README.MD' />
 </Files>
 
-Navigate to index.dart.
+Navigate to index.dart. Some code is already there.
 
-```dart title="index.dart" icon="true"
+```dart title="index.dart"
+import 'package:h4/create.dart';
+
 void main() async {
   var app = createApp(port: 5174);
   var router = createRouter();
   app.use(router);
 // [!code highlight:2]
-  router.get("/", (event) => 'Hello world')
+  router.get("/", (event) => 'Hello world!')
 }
 ```
 
-Yay! The app is ready to go! Let's run our server.
+You're all set! Let's run our server in dev mode.
 
 ```bash
 dart pub global h4:start --dev
 ```
 
-Visit localhost:5173 with your browser and voila! - `Hello world`.
-
-You've just taken your first steps.
+Visit - http://localhost:5173 with your browser and voila! **Hello world!**
