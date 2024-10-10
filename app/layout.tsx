@@ -1,11 +1,15 @@
 import './global.css';
 import { RootProvider } from 'fumadocs-ui/provider';
-import { Inter, Ceviche_One } from 'next/font/google';
+import { Metadata } from 'next';
+import { Ceviche_One } from 'next/font/google';
 import type { ReactNode } from 'react';
 
-const inter = Inter({
-  subsets: ['latin'],
-});
+export const metadata: Metadata = {
+  title: 'H4 Dart.',
+  description: 'A delightful framework for building web servers with dart.',
+  openGraph: {
+  }
+}
 
 const ceviche = Ceviche_One({ weight: "400", display: 'swap', variable: "--font-ceviche", subsets: ["latin"] })
 

@@ -21,10 +21,12 @@ export default function HomePage() {
         </div>
         <span className='font-bold font-stylic text-8xl lg:text-[10rem] leading-none'>4</span>
       </section>
-      <p className="text-white/90 lg:text-lg text-sm text-balance text-center w-96 mt-6 font-code">
+      <p className="text-white/90 lg:text-lg text-md text-balance text-center w-[67%] mt-6 font-code">
         A delightful way to build web servers with dart.
       </p>
-      <a href="/docs"><button className="my-12 bg-orange-200 px-6 py-3 rounded-md font-code text-black/90">Read the docs</button></a>
+
+      <p className="lg:text-lg lg:mt-2.5 mt-4 w-[67%] text-center text-md">So, so good. You should try it sometime.</p>
+      <a href="/docs"><button className="mt-10 mb-12 bg-orange-200 px-6 py-3 rounded-md font-code text-black/90">Read the docs</button></a>
 
       <section className="lg:my-8 my-4 lg:px-0 px-4 ">
         <img src="https://assets.uploadfast.dev/h4-example(2)-ar98.png" className="rounded-lg object-scale-down lg:w-[45em] shadow-3xl" />
