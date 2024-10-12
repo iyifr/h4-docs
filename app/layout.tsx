@@ -4,10 +4,15 @@ import { Metadata } from 'next';
 import { Ceviche_One } from 'next/font/google';
 import type { ReactNode } from 'react';
 
+
 export const metadata: Metadata = {
   title: 'H4 Dart.',
   description: 'A delightful framework for building web servers with dart.',
   openGraph: {
+    type: "website",
+    url: "h4-tau.vercel.app",
+    description: "A delightful framework for building web servers with dart.",
+    images: ""
   }
 }
 

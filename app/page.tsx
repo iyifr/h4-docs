@@ -25,7 +25,7 @@ export default function HomePage() {
         A delightful way to build web servers with dart.
       </p>
 
-      <p className="lg:text-lg lg:mt-2.5 mt-4 w-[67%] text-center text-md">So, so good. You should try it sometime.</p>
+      <p className="lg:text-lg lg:mt-2.5 mt-4 w-[67%] text-center text-md">So, so good. You <strong>need</strong> to try it</p>
       <a href="/docs"><button className="mt-10 mb-12 bg-orange-200 px-6 py-3 rounded-md font-code text-black/90">Read the docs</button></a>
 
       <section className="lg:my-8 my-4 lg:px-0 px-4 ">
