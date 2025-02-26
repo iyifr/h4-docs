@@ -1,4 +1,196 @@
 ---
 title: Requests
-description: Utilties to access incoming requests.
+description: Utilties to help access important information about incoming requests.
+---
+
+### `readBody`
+
+**Read and parse incoming request body**
+
+```dart
+Future<dynamic> readBody(H4Event event)
+```
+
+**Parameters**:
+
+| Parameter | Type      | Description          |
+| --------- | --------- | -------------------- |
+| `event`   | `H4Event` | Request event object |
+
+**Returns**: Parsed body data
+
+**Example**:
+
+```dart
+router.post("/data", (event) async {
+  final body = await readBody(event);
+  // body is a Map<String, dynamic>
+  // or List<dynamic> if JSON array
+  // e.g. [1, 2, 3] or {"a": 1, "b": 2}
+  return {'data': body};
+});
+```
+
+Source: [readRequestBody.dart](https://github.com/iyifr/h4/blob/main/lib/utils/body_utils.dart#L10)
+
+---
+
+### `getQueryParam`
+
+**Retrieve a query parameter value from the request**
+
+```dart
+String? getQueryParam(
+  H4Event event,
+  String paramName, {
+  bool decode = true
+})
+```
+
+**Parameters**:
+
+| Parameter   | Type      | Default | Description                    |
+| ----------- | --------- | ------- | ------------------------------ |
+| `event`     | `H4Event` | -       | The request event object       |
+| `paramName` | `String`  | -       | Name of query parameter to get |
+| `decode`    | `bool`    | true    | URL-decode the parameter value |
+
+**Returns**:  
+The parameter value as `String` or `null` if not found
+
+**Example**:
+
+```dart
+router.get("/search", (event) {
+  final query = getQueryParam(event, 'q');
+  return {'results': searchDatabase(query)};
+});
+```
+
+---
+
+### `getHeader`
+
+**Get a request header value**
+
+```dart
+String? getHeader(
+  H4Event event,
+  String headerName
+)
+```
+
+**Parameters**:
+
+| Parameter    | Type      | Description                  |
+| ------------ | --------- | ---------------------------- |
+| `event`      | `H4Event` | Request event object         |
+| `headerName` | `String`  | Case-insensitive header name |
+
+**Returns**:  
+Header value or `null` if not present
+
+**Example**:
+
+```dart
+router.get("/auth", (event) {
+  final token = getHeader(event, 'authorization');
+  return authenticateUser(token);
+});
+```
+
+---
+
+### `getPathParam`
+
+**Extract path parameter from route**
+
+```dart
+String? getPathParam(
+  H4Event event,
+  String paramName
+)
+```
+
+**Parameters**:
+
+| Parameter   | Type      | Description                    |
+| ----------- | --------- | ------------------------------ |
+| `event`     | `H4Event` | Request event object           |
+| `paramName` | `String`  | Path parameter name to extract |
+
+**Example**:
+
+```dart
+router.get("/users/:id", (event) {
+  final userId = getPathParam(event, 'id');
+  return fetchUser(userId);
+});
+```
+
+---
+
+### `getRequestCookies`
+
+**Parse cookies from request headers**
+
+```dart
+Map<String, String> getRequestCookies(H4Event event)
+```
+
+**Returns**:  
+Map of cookie names to values
+
+**Example**:
+
+```dart
+router.get("/prefs", (event) {
+  final cookies = getRequestCookies(event);
+  return getUserPreferences(cookies['sessionId']);
+});
+```
+
+---
+
+### `readFiles`
+
+**Process multipart file uploads from request**
+
+```dart
+Future<List<UploadedFile>> readFiles(H4Event event)
+```
+
+**Parameters**:
+
+| Parameter | Type      | Description          |
+| --------- | --------- | -------------------- |
+| `event`   | `H4Event` | Request event object |
+
+**Returns**:  
+List of `UploadedFile` instances
+
+**Behavior**:
+
+- Parses multipart/form-data requests
+- Extracts all file upload parts
+- Reads file contents into memory
+- Returns structured file metadata and content
+
+**Example**:
+
+```dart title="file.dart"
+// Existing code..
+
+router.post("/upload", (event) async {
+  final files = await readFiles(event);
+  final firstFile = files.first;
+
+  return {
+    'filename': firstFile.filename,
+    'size': firstFile.size,
+    'type': firstFile.contentType
+  };
+});
+```
+
 ---

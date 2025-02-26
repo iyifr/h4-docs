@@ -2,3 +2,83 @@
 title: Response
 description: Utilties to send response headers and data.
 ---
+
+### `setResponseHeader`
+
+**Set the value of outgoing response header**
+
+```dart
+setResponseHeader(
+  H4Event event,
+  {required String header, required String value}
+)
+```
+
+**Parameters**:
+
+- `event`: An `H4Event` instance containing the HTTP request
+- `header`: The header name to set
+- `value`: Value to assign to the header
+
+**Behavior**:
+
+- Sets header if not already present
+- Adds header value with warning if header exists
+- Example: Setting JSON content type
+
+```dart
+setResponseHeader(event,
+  header: 'Content-Type',
+  value: 'application/json'
+);
+```
+
+---
+
+### `getResponseHeaders`
+
+**Get the outgoing response headers**
+
+```dart
+HttpHeaders? getResponseHeaders(H4Event event)
+```
+
+**Returns**:  
+`HttpHeaders` object or `null` if response unavailable
+
+**Example**:
+
+```dart
+final headers = getResponseHeaders(event);
+final contentType = headers?.value('Content-Type');
+```
+
+---
+
+### `getResponseHeader`
+
+**Retrieve specific header value from response**
+
+```dart
+String? getResponseHeader(
+  H4Event event,
+  String header
+)
+```
+
+**Parameters**: 
+
+- `event`: `H4Event` containing request context
+- `header`: Name of header to retrieve
+
+**Returns**:  
+Header value as `String` or `null` if not found
+
+**Example**:
+
+```dart
+final corsHeader = getResponseHeader(event, 'Access-Control-Allow-Origin');
+if (corsHeader != null) {
+  // Handle CORS configuration
+}
+```

@@ -1,0 +1,6 @@
+{
+	"title": "Guide",
+	"icon": "BookOpen",
+	"pages": ["getting-started", "app-instance"],
+	"defaultOpen": true
+}

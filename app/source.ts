@@ -11,7 +11,10 @@ export const { getPage, getPages, pageTree } = loader({
 	icon(icon) {
 		if (icon) {
 			if (icon in icons) {
-				return createElement(icons[icon as keyof typeof icons], { size: 12 })
+				return createElement(icons[icon as keyof typeof icons], {
+					size: 10,
+					className: 'dark:fill-slate-900 fill-slate-100',
+				})
 			} else {
 				console.log('Not found')
 			}

@@ -1,6 +1,7 @@
 ---
-title: Hello World
-description: Let's get your local server saying the magic words.
+title: Getting started.
+description: Getting started with H4.
+icon: BookOpen
 ---
 
 import { ExternalLinkIcon } from 'lucide-react'
@@ -18,8 +19,6 @@ You must have the dart SDK installed on your computer.
 	icon={<ExternalLinkIcon />}
 />
 
-<br />
-
 Run the following command in your terminal to test that you have installed dart properly.
 
 ```bash
@@ -28,18 +27,20 @@ dart --version
 > Dart SDK version: 3.4.4 (stable) (None) on "linux_x64"
 ```
 
+<br />
+
 ### Set up H4.
 
-Run the command below to get started.
+Let's see how to set up an app, first, install the H4 CLI.
 
 ```bash title="activate"
 dart pub global activate h4
 ```
 
-Now, let's bootstrap your first app.
+Now, let's bootstrap your first app. Run the `init` command.
 
-```bash title="init"
-dart pub global run h4:init
+```bash title="bootstrap"
+h4 init
 ```
 
 After answering the prompts, the directory containing your app will have a file structure like
@@ -90,6 +91,4 @@ You're all set! Let's run our server in dev mode.
 dart pub global run h4:start --dev
 ```
 
-Visit - http://localhost:5173 with your browser and voila! **Hello world!**
-
-Let's now build a basic app with H4.
+Visit - http://localhost:5174 with your browser and voila! **Hello world!**

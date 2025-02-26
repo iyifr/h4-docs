@@ -1,0 +1,130 @@
+---
+title: 'App instance'
+description: 'The H4 App instance is the core of your server.'
+icon: 'Zap'
+---
+
+The `H4` class forms the foundation of your server, handling HTTP requests, middleware, and
+lifecycle management. Create an instance using the `createApp()` factory function:
+
+### Core Creation API
+
+#### `createApp()`
+
+```dart
+final app = createApp(
+  port: 3000,         // Default port
+  autoStart: true,    // Automatic startup
+  onRequest: myMiddleware,
+  onError: errorHandler,
+  afterResponse: responseLogger
+);
+```
+
+## Configuration Options
+
+| Parameter       | Type           | Default | Description                |
+| --------------- | -------------- | ------- | -------------------------- |
+| `port`          | `int`          | 3000    | HTTP listening port        |
+| `autoStart`     | `bool`         | true    | Automatic server startup   |
+| `onRequest`     | `Middleware`   | null    | Pre-processing middleware  |
+| `onError`       | `ErrorHandler` | null    | Custom error handling      |
+| `afterResponse` | `Middleware`   | null    | Post-processing middleware |
+
+## Lifecycle Hooks
+
+### Request Flow
+
+1. `onRequest` middleware
+2. Route handler execution
+3. `afterResponse` middleware
+
+```dart
+app = createApp(
+  onRequest: (request) {
+    print('Incoming ${request.method} @ ${request.url}');
+    return request;
+  },
+  afterResponse: (response) {
+    print('Outgoing ${response.statusCode}');
+    return response;
+  }
+);
+```
+
+## Error Handling
+
+```dart
+createApp(
+  onError: (error, stackTrace, event) {
+    print('[ERROR] ${error.toString()}');
+    if (event != null) {
+      print('Failed request: ${event.request.method} ${event.request.url}');
+    }
+    return ErrorResponse(500, 'Custom error message');
+  }
+)
+```
+
+## Manual Startup Control
+
+When `autoStart: false`:
+
+```dart
+final app = createApp(
+  port: 8080,
+  autoStart: false
+);
+
+// Later in code
+await app.start().then((instance) {
+  print('Server running on ${instance.port}');
+});
+```
+
+## Routing Integration
+
+```dart
+final app = createApp();
+final router = createRouter();
+
+router.get('/api', (event) => {'status': 'ok'});
+router.post('/submit', handleSubmission);
+
+app.use(router); // Mount router middleware
+```
+
+## Complete Example
+
+```dart
+import 'package:h4/create.dart';
+
+void main() async {
+  final app = createApp(
+    port: 8080,
+    onRequest: (req) {
+      print('Request started: ${DateTime.now()}');
+      return req;
+    },
+    onError: (err, stack, event) {
+      print('Error: $err');
+      return ErrorResponse(500, 'Server error');
+    },
+    afterResponse: (res) {
+      print('Response sent: ${DateTime.now()}');
+      return res;
+    }
+  );
+
+  final router = createRouter()
+    ..get('/', (event) => 'Welcome to H4')
+    ..post('/data', handleData);
+
+  app.use(router);
+
+  await app.start();
+}
+```
+
+> **Pro Tip**: Use `createRouter()` for organized route management and middleware composition.
+> Routes support all standard HTTP methods and path parameters.

@@ -1,19 +1,28 @@
 ---
 title: Introduction
-description: H4 is a sweet, loosely opinionated framework for building web servers with dart.
+description: H4 is a delightful way to build web servers with dart
 ---
 
-### Why use dart?
+H4 is a delightful framework for building web servers with Dart. It's designed to give you
+composable utilities to build your server with ease.
 
-Dart is a mature, approachable scripting language. It has a robust standard library and ecosystem of
-tooling that allows developers to develop applications fast.
+## Getting Started
 
-For dart developers familiar with tools such as Node.js and Express, you will find H4 refreshing and
-productive to use.
+Create your first H4 application in just a few lines of code:
 
-<br />
+```dart title="index.dart"
+import 'package:h4/create.dart';
 
-#### More Resources
+void main() async {
+  var app = createApp(port: 5174);
+  var router = createRouter();
+  app.use(router);
+  // Simply return values from your handlers and H4 handles serialization
+  router.get("/", (event) => "Hello world")
+}
+```
+
+## More Resources
 
 <Cards>
 	<Card
