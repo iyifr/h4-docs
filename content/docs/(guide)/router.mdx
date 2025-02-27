@@ -1,0 +1,107 @@
+---
+title: Router
+description:
+  A router is a core component of H4. It's used to route requests to the appropriate handler.
+icon: ChevronsLeftRightEllipsis
+---
+
+## Creating a router
+
+Create a router instance with optional base path:
+
+```dart
+// Default router with no base path
+final router = createRouter();
+
+// Router with base path
+final apiRouter = createRouter(basePath: '/api');
+```
+
+You can create multiple routers with different base paths and combine them:
+
+```dart
+void main() {
+  final app = createApp();
+
+  final apiRouter = createRouter(basePath: '/api');
+  final adminRouter = createRouter(basePath: '/admin');
+
+  app.use(apiRouter);
+  app.use(adminRouter);
+}
+```
+
+This allows you to organize routes by logical groupings while maintaining separate base paths.
+
+## Route Methods
+
+Handle all HTTP methods with explicit handlers:
+
+```dart
+router.get("/resource", (event) => "GET handler");
+router.post("/resource", (event) => "POST handler");
+router.put("/resource", (event) => "PUT handler");
+router.delete("/resource", (event) => "DELETE handler");
+router.patch("/resource", (event) => "PATCH handler");
+router.head("/resource", (event) => "HEAD handler");
+router.options("/resource", (event) => "OPTIONS handler");
+router.trace("/resource", (event) => "TRACE handler");
+router.all("/resource", (event) => "Handles ALL method types");
+```
+
+## Path Parameters
+
+Capture dynamic path segments using colon syntax:
+
+```dart
+router.get("/users/:id", (event) {
+  final userId = getPathParam(event, 'id');
+  return {'user': fetchUser(userId)};
+});
+
+router.get("/posts/:slug/comments/:commentId", (event) {
+  final slug = getPathParam(event, 'slug');
+  final commentId = getPathParam(event, 'commentId');
+  return fetchComment(slug, commentId);
+});
+```
+
+## Catch-All Routes
+
+Handle unmatched routes with wildcard pattern:
+
+```dart
+// Match all requests under /api
+router.all("/api/*", handle404);
+
+// Global 404 handler
+router.all("**", (event) {
+  event.statusCode = 404;
+  return "Route not found";
+});
+```
+
+## Route Organization
+
+Nested routers with base paths:
+
+```dart
+final v1Router = createRouter(basePath: '/api/v1');
+
+v1Router.get("/users", (event) => userList);
+v1Router.post("/posts", (event) => createPost);
+
+// Mount under main app
+app.use(v1Router);
+```
+
+## Response Handling
+
+Return various response types directly:
+
+```dart
+router.get("/text", (event) => "Plain text response");
+router.get("/json", (event) => {"key": "value"});
+router.get("/html", (event) => "<h1>Hello</h1>");
+router.get("/bytes", (event) => [1, 2, 3]);
+```

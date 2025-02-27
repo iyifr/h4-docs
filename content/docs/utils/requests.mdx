@@ -17,13 +17,14 @@ Future<dynamic> readBody(H4Event event)
 | --------- | --------- | -------------------- |
 | `event`   | `H4Event` | Request event object |
 
-**Returns**: Parsed body data
+**Returns**: Depends on the content type header. Parsed JSON-like data as a `dart:convert` Map or
+List | Text body if content type request header is not set to `application/json`.
 
-**Example**:
+**Example**
 
-```dart
+```dart title="example.dart"
 router.post("/data", (event) async {
-  final body = await readBody(event);
+  final body = await readBody(event); // [!code highlight]
   // body is a Map<String, dynamic>
   // or List<dynamic> if JSON array
   // e.g. [1, 2, 3] or {"a": 1, "b": 2}
@@ -31,7 +32,7 @@ router.post("/data", (event) async {
 });
 ```
 
-Source: [readRequestBody.dart](https://github.com/iyifr/h4/blob/main/lib/utils/body_utils.dart#L10)
+[Read source](https://github.com/iyifr/h4/blob/main/lib/utils/body_utils.dart#L10)
 
 ---
 
@@ -58,9 +59,9 @@ String? getQueryParam(
 **Returns**:  
 The parameter value as `String` or `null` if not found
 
-**Example**:
+**Example**
 
-```dart
+```dart title="example.dart"
 router.get("/search", (event) {
   final query = getQueryParam(event, 'q');
   return {'results': searchDatabase(query)};
@@ -92,7 +93,7 @@ Header value or `null` if not present
 
 **Example**:
 
-```dart
+```dart title="example.dart"
 router.get("/auth", (event) {
   final token = getHeader(event, 'authorization');
   return authenticateUser(token);
@@ -121,7 +122,7 @@ String? getPathParam(
 
 **Example**:
 
-```dart
+```dart title="example.dart"
 router.get("/users/:id", (event) {
   final userId = getPathParam(event, 'id');
   return fetchUser(userId);
@@ -143,7 +144,7 @@ Map of cookie names to values
 
 **Example**:
 
-```dart
+```dart title="example.dart"
 router.get("/prefs", (event) {
   final cookies = getRequestCookies(event);
   return getUserPreferences(cookies['sessionId']);
@@ -178,7 +179,7 @@ List of `UploadedFile` instances
 
 **Example**:
 
-```dart title="file.dart"
+```dart title="example.dart"
 // Existing code..
 
 router.post("/upload", (event) async {
