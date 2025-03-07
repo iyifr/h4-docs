@@ -4,10 +4,9 @@ description: 'The H4 App instance is the core of your server.'
 icon: 'Zap'
 ---
 
-The `H4` class forms the foundation of your server, handling HTTP requests, middleware, and
-lifecycle management. Create an instance using the `createApp()` factory function:
-
 ### Core Creation API
+
+Use the createAPP function to create an instance of the H4 App.
 
 #### `createApp()`
 
@@ -125,6 +124,3 @@ void main() async {
   await app.start();
 }
 ```
-
-> **Pro Tip**: Use `createRouter()` for organized route management and middleware composition.
-> Routes support all standard HTTP methods and path parameters.

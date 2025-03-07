@@ -5,7 +5,7 @@ description: Utilties to help access important information about incoming reques
 
 ### `readBody`
 
-**Read and parse incoming request body**
+**Parse incoming request body**
 
 ```dart
 Future<dynamic> readBody(H4Event event)
@@ -17,12 +17,15 @@ Future<dynamic> readBody(H4Event event)
 | --------- | --------- | -------------------- |
 | `event`   | `H4Event` | Request event object |
 
-**Returns**: Depends on the content type header. Parsed JSON-like data as a `dart:convert` Map or
-List | Text body if content type request header is not set to `application/json`.
+**Returns**:
+
+- If the content type header is `application/json`: Parsed JSON data as a `Map<String, dynamic>` or
+  `List<dynamic>` from `dart:convert`
+- Otherwise: Raw text body as a `String`
 
 **Example**
 
-```dart title="example.dart"
+```dart title="index.dart"
 router.post("/data", (event) async {
   final body = await readBody(event); // [!code highlight]
   // body is a Map<String, dynamic>
@@ -102,12 +105,12 @@ router.get("/auth", (event) {
 
 ---
 
-### `getPathParam`
+### `getRouteParam`
 
 **Extract path parameter from route**
 
 ```dart
-String? getPathParam(
+String? getRouteParam(
   H4Event event,
   String paramName
 )
@@ -124,7 +127,7 @@ String? getPathParam(
 
 ```dart title="example.dart"
 router.get("/users/:id", (event) {
-  final userId = getPathParam(event, 'id');
+  final userId = getRouteParam(event, 'id');
   return fetchUser(userId);
 });
 ```
@@ -179,17 +182,17 @@ List of `UploadedFile` instances
 
 **Example**:
 
-```dart title="example.dart"
+```dart title="index.dart"
 // Existing code..
 
 router.post("/upload", (event) async {
   final files = await readFiles(event);
-  final firstFile = files.first;
+  final file = files.first;
 
   return {
-    'filename': firstFile.filename,
-    'size': firstFile.size,
-    'type': firstFile.contentType
+    'filename': file.filename,
+    'size': file.size,
+    'type': file.contentType
   };
 });
 ```

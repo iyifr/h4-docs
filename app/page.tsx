@@ -1,6 +1,3 @@
-import Image from "next/image";
-import BG from "./icons/bg.jpeg"
-
 export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col items-center text-center bg-no-repeat">
@@ -22,8 +19,8 @@ export default function HomePage() {
       </p>
       <p className="lg:text-lg lg:mt-2.5 mt-4 w-[67%] text-center text-md">Elegant, powerful, and intuitive. You'll <strong>love</strong> developing with it.</p>
       <a href="/docs"><button className="mt-10 mb-12 bg-orange-200 px-6 py-3 rounded-md font-code text-black/90">Read the docs</button></a>
-      <section className="lg:my-8 my-4 lg:px-0 px-4 max-w-full">
-        <img src="https://assets.uploadfast.dev/h4-example(2)-ar98.png" className="rounded-lg object-scale-down w-full max-w-[45em] shadow-3xl" />
+      <section className="lg:my-8 my-4 lg:px-0 px-4 max-w-full overflow-hidden">
+        <img src="https://assets.uploadfast.dev/h4-example(2)-ar98.png" className="rounded-lg object-scale-down w-full max-w-[45em] shadow-3xl" alt="H4 code example" />
       </section>
     </main>
   );

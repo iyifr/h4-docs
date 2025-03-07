@@ -3,7 +3,7 @@ title: Response
 description: Utilties to send response headers and data.
 ---
 
-### `setResponseHeader`
+## `setResponseHeader`
 
 **Set the value of outgoing response header**
 
@@ -14,11 +14,11 @@ setResponseHeader(
 )
 ```
 
-**Parameters**:
-
-- `event`: An `H4Event` instance containing the HTTP request
-- `header`: The header name to set
-- `value`: Value to assign to the header
+| Parameter | Type      | Description                                       |
+| --------- | --------- | ------------------------------------------------- |
+| `event`   | `H4Event` | An `H4Event` instance containing the HTTP request |
+| `header`  | `String`  | The header name to set                            |
+| `value`   | `String`  | Value to assign to the header                     |
 
 **Behavior**:
 
@@ -35,7 +35,7 @@ setResponseHeader(event,
 
 ---
 
-### `getResponseHeaders`
+## `getResponseHeaders`
 
 **Get the outgoing response headers**
 
@@ -55,7 +55,7 @@ final contentType = headers?.value('Content-Type');
 
 ---
 
-### `getResponseHeader`
+## `getResponseHeader`
 
 **Retrieve specific header value from response**
 
@@ -66,19 +66,9 @@ String? getResponseHeader(
 )
 ```
 
-**Parameters**: 
+**Parameters**:
 
 - `event`: `H4Event` containing request context
 - `header`: Name of header to retrieve
 
-**Returns**:  
-Header value as `String` or `null` if not found
-
-**Example**:
-
-```dart
-final corsHeader = getResponseHeader(event, 'Access-Control-Allow-Origin');
-if (corsHeader != null) {
-  // Handle CORS configuration
-}
-```
+**Returns**: Header value as `String` or `null` if not found

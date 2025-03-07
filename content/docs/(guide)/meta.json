@@ -1,5 +1,5 @@
 {
 	"title": "Guide",
-	"pages": ["getting-started", "app-instance", "router"],
+	"pages": ["getting-started", "router", "app-instance"],
 	"defaultOpen": true
 }
